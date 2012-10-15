@@ -48,10 +48,10 @@ public class WireFeedOutput {
     private static FeedGenerators getFeedGenerators() {
         synchronized(WireFeedOutput.class) {
             FeedGenerators generators = (FeedGenerators)
-                clMap.get(Thread.currentThread().getContextClassLoader());
+                clMap.get(WireFeedOutput.class.getClassLoader());
             if (generators == null) {
                 generators = new FeedGenerators();
-                clMap.put(Thread.currentThread().getContextClassLoader(), generators);
+                clMap.put(WireFeedOutput.class.getClassLoader(), generators);
             }
             return generators;
         }

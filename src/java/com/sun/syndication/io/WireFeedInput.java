@@ -59,10 +59,10 @@ public class WireFeedInput {
     private static FeedParsers getFeedParsers() {
         synchronized(WireFeedInput.class) {
             FeedParsers parsers = (FeedParsers)
-                clMap.get(Thread.currentThread().getContextClassLoader());
+                clMap.get(WireFeedInput.class.getClassLoader());
             if (parsers == null) {
                 parsers = new FeedParsers();
-                clMap.put(Thread.currentThread().getContextClassLoader(), parsers);
+                clMap.put(WireFeedInput.class.getClassLoader(), parsers);
             }
             return parsers;
         }

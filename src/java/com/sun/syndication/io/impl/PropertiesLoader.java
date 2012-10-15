@@ -40,11 +40,11 @@ public class PropertiesLoader {
     public static PropertiesLoader getPropertiesLoader() {
         synchronized(PropertiesLoader.class) {
             PropertiesLoader loader = (PropertiesLoader)
-                clMap.get(Thread.currentThread().getContextClassLoader());
+                clMap.get(PropertiesLoader.class.getClassLoader());
             if (loader == null) {
                 try {
                     loader = new PropertiesLoader(MASTER_PLUGIN_FILE, EXTRA_PLUGIN_FILE);
-                    clMap.put(Thread.currentThread().getContextClassLoader(), loader);
+                    clMap.put(PropertiesLoader.class.getClassLoader(), loader);
                 }
                 catch (IOException ex) {
                     throw new RuntimeException(ex);
@@ -66,7 +66,7 @@ public class PropertiesLoader {
      */
     private PropertiesLoader(String masterFileLocation,String extraFileLocation) throws IOException {
         List propertiesList = new ArrayList();
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        ClassLoader classLoader = PropertiesLoader.class.getClassLoader();
 
         try {
             InputStream is = classLoader.getResourceAsStream(masterFileLocation);

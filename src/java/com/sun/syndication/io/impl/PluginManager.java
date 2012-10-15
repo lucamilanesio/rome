@@ -129,7 +129,7 @@ public abstract class PluginManager {
      *
      */
     private Class[] getClasses() throws ClassNotFoundException {
-        ClassLoader classLoader = Thread.currentThread().getContextClassLoader();
+        ClassLoader classLoader = PluginManager.class.getClassLoader();
         List classes = new ArrayList();
         boolean useLoadClass = Boolean.valueOf(System.getProperty("rome.pluginmanager.useloadclass", "false")).booleanValue();
         for (int i = 0; i <_propertyValues.length; i++) {
